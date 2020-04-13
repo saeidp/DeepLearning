@@ -1,0 +1,41 @@
+# Windows
+Thumbs.db
+
+# Visual Studio
+*.obj
+*.wixobj
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.sdf
+*.opensdf
+*.suo
+*.tlh
+*.tmp_proj
+*.bak
+*.cache
+*.ilk
+*.sbr
+*.vsext
+.vs/
+.vscode/
+obj/
+bin/
+[Dd]ebug/
+[Rr]elease/
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings
+*/packages/
+
+# Jupyter Notebook
+.ipynb*/
+test/
+models/
+test*.*
+*.txt
+model.tar*.*
