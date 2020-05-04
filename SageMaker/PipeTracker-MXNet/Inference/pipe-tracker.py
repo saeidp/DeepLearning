@@ -63,17 +63,17 @@ class PipeTracker:
             cv2.circle(frame, (cx,cy), 0,(0,255,255), 5)
         
         # rectangle
-        rect = cv2.minAreaRect(contourMask)
-        box = cv2.boxPoints(rect)
-        box = np.int0(box)
-        cv2.drawContours(frame,[box],0,(255,255,255),1)
+        # rect = cv2.minAreaRect(contourMask)
+        # box = cv2.boxPoints(rect)
+        # box = np.int0(box)
+        # cv2.drawContours(frame,[box],0,(255,255,255),1)
         
         # Line
-        rows,cols = mask.shape[:2]
-        [vx,vy,x,y] = cv2.fitLine(contourMask, cv2.DIST_L2,0,0.01,0.01)
-        lefty = int((-x*vy/vx) + y)
-        righty = int(((cols-x)*vy/vx)+y)
-        img = cv2.line(frame,(cols-1,righty),(0,lefty),(255,255,255),1)
+        # rows,cols = mask.shape[:2]
+        # [vx,vy,x,y] = cv2.fitLine(contourMask, cv2.DIST_L2,0,0.01,0.01)
+        # lefty = int((-x*vy/vx) + y)
+        # righty = int(((cols-x)*vy/vx)+y)
+        # img = cv2.line(frame,(cols-1,righty),(0,lefty),(255,255,255),1)
 
         return frame
 
@@ -82,20 +82,31 @@ pipeTracker = PipeTracker()
 
 frame_index = 0
 fileName = "videos/027_Centre_2TL-Zone 3_2017-09-03_02-55-06_4.mp4"
-cap = cv2.VideoCapture(fileName)
-success, frm = cap.read()
-while(success):
-    frame_index +=1
-    if (frame_index % 35 != 0):
-        success, frm = cap.read()
-        continue
-    processed_frame = pipeTracker.process_frame(frm)
-    if len(processed_frame.shape) == 2:
-        continue
-    cv2.imshow("result", processed_frame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-    success, frm = cap.read()
 
+# If the input is the camera, pass 0 instead of the video file name
+cap = cv2.VideoCapture(fileName)
+if(cap.isOpened() == False):
+    print("Error opening video stream or file")
+
+# Read until video is completed
+while(cap.isOpened()):
+    success, frm = cap.read()
+    if(success == True):
+        frame_index +=1
+        if (frame_index % 35 != 0):
+            continue
+        processed_frame = pipeTracker.process_frame(frm)
+        if len(processed_frame.shape) == 2:
+            continue
+        cv2.imshow("result", processed_frame)
+
+        # Press Q on keyboard to  exit
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+    else:
+        break
+
+# When everything done, release the video capture object
 cap.release()
+# Closes all the frames
 cv2.destroyAllWindows()
