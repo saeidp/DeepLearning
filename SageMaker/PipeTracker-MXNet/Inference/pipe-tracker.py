@@ -63,17 +63,17 @@ class PipeTracker:
             cv2.circle(frame, (cx,cy), 0,(0,255,255), 5)
         
         # rectangle
-        # rect = cv2.minAreaRect(contourMask)
-        # box = cv2.boxPoints(rect)
-        # box = np.int0(box)
-        # cv2.drawContours(frame,[box],0,(255,255,255),1)
+        rect = cv2.minAreaRect(contourMask)
+        box = cv2.boxPoints(rect)
+        box = np.int0(box)
+        cv2.drawContours(frame,[box],0,(255,255,255),1)
         
         # Line
-        # rows,cols = mask.shape[:2]
-        # [vx,vy,x,y] = cv2.fitLine(contourMask, cv2.DIST_L2,0,0.01,0.01)
-        # lefty = int((-x*vy/vx) + y)
-        # righty = int(((cols-x)*vy/vx)+y)
-        # img = cv2.line(frame,(cols-1,righty),(0,lefty),(255,255,255),1)
+        rows,cols = mask.shape[:2]
+        [vx,vy,x,y] = cv2.fitLine(contourMask, cv2.DIST_L2,0,0.01,0.01)
+        lefty = int((-x*vy/vx) + y)
+        righty = int(((cols-x)*vy/vx)+y)
+        img = cv2.line(frame,(cols-1,righty),(0,lefty),(255,255,255),1)
 
         return frame
 
@@ -88,6 +88,10 @@ cap = cv2.VideoCapture(fileName)
 if(cap.isOpened() == False):
     print("Error opening video stream or file")
 
+#frame_width = int(cap.get(3))
+#frame_height = int(cap.get(4))
+out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 5, (224,224))
+
 # Read until video is completed
 while(cap.isOpened()):
     success, frm = cap.read()
@@ -98,6 +102,7 @@ while(cap.isOpened()):
         processed_frame = pipeTracker.process_frame(frm)
         if len(processed_frame.shape) == 2:
             continue
+        out.write(processed_frame)
         cv2.imshow("result", processed_frame)
 
         # Press Q on keyboard to  exit
@@ -108,5 +113,7 @@ while(cap.isOpened()):
 
 # When everything done, release the video capture object
 cap.release()
+out.release()
+
 # Closes all the frames
 cv2.destroyAllWindows()
