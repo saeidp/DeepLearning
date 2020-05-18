@@ -1,0 +1,17 @@
+conda create -n pipe-tracker-gpu python=3.6
+
+# https://pypi.org/project/mxnet-cu101/
+pip install --pre mxnet-cu101 -f https://dist.mxnet.io/python/cu101
+
+# This one is not working then using the above
+# pip install mxnet-cu101
+
+# https://gluon-cv.mxnet.io/install.html
+pip install --upgrade mxnet-cu101 gluoncv
+
+#https://anaconda.org/anaconda/opencv
+conda install -c anaconda opencv
+
+conda install -c anaconda pandas
+
+conda install -c anaconda jupyter
