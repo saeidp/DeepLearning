@@ -1,0 +1,8 @@
+Resnet50:DeepLab
+https://console.aws.amazon.com/s3/buckets/pipe-line-test-2/ss-demo/output/pipeline-deeplab-2020-04-20-07-39-26-468/output/?region=ap-southeast-2&tab=overview
+
+Resnet101:DeepLab
+https://console.aws.amazon.com/s3/buckets/pipe-line-test-2/ss-demo/output/pipeline-deeplab-2020-04-21-23-11-29-144/output/?region=ap-southeast-2&tab=overview
+
+Resnet50:FCN
+https://console.aws.amazon.com/s3/buckets/pipe-line-test-2/ss-demo/output/pipeline-deeplab-2020-04-22-03-11-40-305/output/?region=ap-southeast-2&tab=overview
