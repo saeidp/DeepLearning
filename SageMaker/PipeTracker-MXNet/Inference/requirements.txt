@@ -55,7 +55,7 @@ pytz==2019.3
 pywin32==227
 pywinpty==0.5.7
 pyzmq==19.0.0
-requests==2.18.4
+requests==2.20.0
 scipy==1.4.1
 Send2Trash==1.5.0
 six==1.14.0
